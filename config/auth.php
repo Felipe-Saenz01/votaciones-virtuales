@@ -36,6 +36,10 @@ return [
     */
 
     'guards' => [
+        'sufragante' => [
+            'driver' => 'session',
+            'provider' => 'sufragante',
+        ],
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
@@ -60,10 +64,16 @@ return [
     */
 
     'providers' => [
+        'sufragante' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Sufragante::class,
+        ],
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+
+        
 
         // 'users' => [
         //     'driver' => 'database',
