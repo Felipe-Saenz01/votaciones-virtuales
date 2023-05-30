@@ -12,9 +12,7 @@
         @endif
 
         <div class="mb-4 text-sm text-gray-600">
-            Hola <strong>{{$nombres}}</strong>, Hemos enviado un código de acceso al correo suminstrado, ingresalo en el formulario para ingresar al aplicativo
-        </br>
-            Correo: {{$email}}
+            Hola <strong>{{$nombres}}</strong>, hemos enviado un código de acceso al correo suminstrado, ingresalo en el formulario para ingresar al aplicativo
         </div>
         
         <form method="POST" action="{{ route('sufragante.verify-token') }}">
