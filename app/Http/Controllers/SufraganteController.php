@@ -118,14 +118,14 @@ class SufraganteController extends Controller
         if($request->codigo != $sufragante->token){
             return redirect()->route('welcome')->withErrors('Código incorrecto');
         }
-        $sufraganteAuth = Auth::guard('sufragante')->attempt(['email'=> $request->email,'password' => $request->codigo]);
-        dd($sufraganteAuth);
-        // Auth::guard('sufragante')->attempt(['email'=> $request->email,'token' => $request->codigo])
-        if($sufraganteAuth){
-            // $request->session()->regenerate();
-            return redirect()->intended(route('sufragante.dashboard'));
-        }
-        // Auth::guard('sufragante')->attempt(['email'=> $request->email,'token' => $request->token]);
+        // $sufraganteAuth = Auth::guard('sufragante')->attempt(['email'=> $request->email,'password' => $request->codigo]);
+        // dd($sufraganteAuth);
+        // // Auth::guard('sufragante')->attempt(['email'=> $request->email,'token' => $request->codigo])
+        // if($sufraganteAuth){
+        //     // $request->session()->regenerate();
+        //     return redirect()->intended(route('sufragante.dashboard'));
+        // }
+        // // Auth::guard('sufragante')->attempt(['email'=> $request->email,'token' => $request->token]);
         // return redirect()->route('sufragante.dashboard');
 
         return 'codigos coinciden: '.$request->codigo .' Y token: '.$sufragante->token;

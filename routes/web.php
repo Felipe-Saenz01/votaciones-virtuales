@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ParametrosController;
 use App\Http\Controllers\SufraganteController;
+use App\Http\Controllers\CalendarioElectoralController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,6 +39,23 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+    //Rutas Parametrizacion
+    Route::get('/parametros',[ParametrosController::class, 'index'])
+    ->name('parametros.index');
+
+    //Rutas Calendario Electoral
+    //Route::resource('calendario', CalendarioElectoralController::class);
+    Route::get('/calendario',[CalendarioElectoralController::class, 'index'])
+    ->name('calendario.index');
+    Route::get('/calendario/create',[CalendarioElectoralController::class, 'create'])
+    ->name('calendario.create');
+    Route::post('/calendario',[CalendarioElectoralController::class, 'store'])
+    ->name('calendario.store');
+    Route::get('/calendario/{calendarioElectoral}/edit',[CalendarioElectoralController::class, 'edit'])
+    ->name('calendario.edit');
+    Route::put('/calendario/{calendarioElectoral}',[CalendarioElectoralController::class, 'update'])
+    ->name('calendario.update');
+    
 
     Route::get('/sufragante',[SufraganteController::class, 'index'])
     ->name('sufragante.index');

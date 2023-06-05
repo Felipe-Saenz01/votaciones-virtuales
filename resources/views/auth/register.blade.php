@@ -1,7 +1,9 @@
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
-            <x-authentication-card-logo />
+            <div class="flex items-center justify-center mb-2">
+                <img src="https://i.postimg.cc/GtJMcSLD/LOGO-1024x601.png" width=15% alt="Unitropico Logo" class="mx-auto">
+            </div>
         </x-slot>
 
         <x-validation-errors class="mb-4" />
