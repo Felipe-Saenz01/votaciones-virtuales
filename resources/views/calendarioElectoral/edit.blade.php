@@ -4,7 +4,7 @@
         <x-slot name="logo">
         </x-slot>
         <div class="mx-auto font-bold flex justify-between my-5">
-            <h1 class="mr-auto">Registro Calendario Eelctoral</h1>
+            <h1 class="mr-auto">Registro Calendario Electoral</h1>
             <form action="#" method="POST">
                 @csrf
                 @method('delete')

@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {   
+        /*
         \App\Models\PeriodoAcademico::factory(1)->create([
             'nombrePeriodo' => '2023-A',
             'estado' => 'Activo'
@@ -28,10 +29,10 @@ class DatabaseSeeder extends Seeder
                 'idPeriodoAcademico' => $periodo->id,
                 'estado' => 'Activo'
             ]); //
-        }
+        }*/
 
         // \App\Models\User::factory(10)->create();
-        //  \App\Models\Sufragante::factory(5)->create();
+         \App\Models\Sufragante::factory(5)->create();
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',

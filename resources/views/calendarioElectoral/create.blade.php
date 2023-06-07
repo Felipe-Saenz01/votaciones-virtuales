@@ -4,7 +4,7 @@
         <x-slot name="logo">
         </x-slot>
         <div class="mx-auto font-bold my-5">
-            <h1 class="mx-auto">Registro Calendario Eelctoral</h1>
+            <h1 class="mx-auto">Registro Calendario Electoral</h1>
         </div>
         <x-validation-errors class="mb-4" />
 
