@@ -8,13 +8,23 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class SufraganteController extends Controller
 {
+
+    protected $redirectTo = '/sufragante';
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct()
+    {
+        $this->middleware('guest:sufragante')->except('logout');
+    }
+
     public function index()
     {
         return view('sufragantes.index', [
@@ -85,9 +95,10 @@ class SufraganteController extends Controller
             return redirect()->back()->withErrors('Este correo no coincide con algun registro de la lista de sufragantes.');
         }
 
-        if(is_null($sufragante->token)){
+        if(is_null($sufragante->codigo)){
             $token = Str::random(7);
-            $sufragante->token = $token;
+            $sufragante->codigo = $token;
+            $sufragante->password = Hash::make($token);
             $sufragante->save();
 
             $correo = new sufraganteEmailToken($sufragante);
@@ -115,20 +126,26 @@ class SufraganteController extends Controller
         }
 
 
-        if($request->codigo != $sufragante->token){
+        if($request->codigo != $sufragante->codigo){
             return redirect()->route('welcome')->withErrors('Código incorrecto');
         }
-        // $sufraganteAuth = Auth::guard('sufragante')->attempt(['email'=> $request->email,'password' => $request->codigo]);
-        // dd($sufraganteAuth);
-        // // Auth::guard('sufragante')->attempt(['email'=> $request->email,'token' => $request->codigo])
-        // if($sufraganteAuth){
-        //     // $request->session()->regenerate();
-        //     return redirect()->intended(route('sufragante.dashboard'));
-        // }
-        // // Auth::guard('sufragante')->attempt(['email'=> $request->email,'token' => $request->token]);
-        // return redirect()->route('sufragante.dashboard');
-
+        
+        $sufraganteAuth = Auth::guard('sufragante')->attempt(['email'=> $request->email,'password' => $request->codigo]);
+        if($sufraganteAuth){
+            $sufragante->codigo = null;
+            $sufragante->save();
+            $request->session()->regenerate();
+            return redirect()->intended(route('sufragante.dashboard'));
+        }
         return 'codigos coinciden: '.$request->codigo .' Y token: '.$sufragante->token;
 
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::guard('sufragante')->logout();
+        Session::regenerateToken();
+        // $request->session()->invalidate();
+        return redirect()->route('welcome');
     }
 }

@@ -38,7 +38,7 @@ return [
     'guards' => [
         'sufragante' => [
             'driver' => 'session',
-            'provider' => 'sufragante',
+            'provider' => 'sufragantes',
         ],
         'web' => [
             'driver' => 'session',
@@ -64,7 +64,7 @@ return [
     */
 
     'providers' => [
-        'sufragante' => [
+        'sufragantes' => [
             'driver' => 'eloquent',
             'model' => App\Models\Sufragante::class,
         ],
