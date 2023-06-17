@@ -23,16 +23,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::post('/sufragante/verify-token', [SufraganteController::class,'validatetoken'])
-->name('sufragante.verify-token');
-
-Route::post('/sufragante/send-token', [SufraganteController::class, 'generatetoken'])
-->name('sufragante.send-token');
-
-Route::get('/sufragante/dashboard', function(){
-    return view('sufragantes.dashboard');
-})->name('sufragante.dashboard')->middleware('auth:sufragante');
-
 
 Route::middleware([
     'auth:sanctum',
@@ -96,3 +86,6 @@ Route::middleware([
 
 
 });
+
+
+require 'sufragante.php';

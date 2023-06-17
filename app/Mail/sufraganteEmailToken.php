@@ -41,7 +41,7 @@ class sufraganteEmailToken extends Mailable
             view: 'emails.sufragante-token',
             with:[
                 'nombres' => $this->sufragante->nombres,
-                'token' => $this->sufragante->token,
+                'token' => $this->sufragante->codigo,
             ]
         );
     }
