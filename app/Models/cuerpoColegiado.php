@@ -11,4 +11,9 @@ class cuerpoColegiado extends Model
 
 
     protected $fillable = ['nombre'];
+
+    public function postulaciones()
+    {
+        return $this->hasMany(Postulacion::class);
+    }
 }
