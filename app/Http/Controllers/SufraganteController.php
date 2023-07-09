@@ -145,7 +145,8 @@ class SufraganteController extends Controller
     {
         Auth::guard('sufragante')->logout();
         Session::regenerateToken();
-        // $request->session()->invalidate();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return redirect()->route('welcome');
     }
 }
