@@ -16,4 +16,8 @@ class ProgramaAcademico extends Model
         return $this->belongsTo(Facultad::class, 'idFacultad');
     }
 
+    public function postulaciones()
+    {
+        return $this->hasMany(Postulacion::class); 
+    }
 }

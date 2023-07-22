@@ -19,7 +19,7 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Candidatos') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    <x-nav-link href="{{ route('postulaciones.index') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Postulacion') }}
                     </x-nav-link>
                     <x-nav-link href="{{ route('parametros.index') }}" :active="request()->routeIs('parametros.*')">

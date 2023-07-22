@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostulacionController;
 use App\Http\Controllers\ProgramaAcademicoController;
 use App\Http\Controllers\Facultadcontroller;
 use App\Http\Controllers\CuerpoColegiadoController;
@@ -89,6 +90,16 @@ Route::middleware([
     Route::get('/parametros/facultades/{facultad}/edit', [FacultadController::class, 'edit'])->name('parametros.facultades.edit');
     Route::put('/parametros/facultades/{facultad}', [FacultadController::class, 'update'])->name('parametros.facultades.update');
     Route::delete('/parametros/facultades/{facultad}', [FacultadController::class, 'destroy'])->name('parametros.facultades.destroy');
+
+    /////rutas de postulacion
+
+    Route::get('/postulaciones', [PostulacionController::class, 'index'])->name('postulaciones.index');
+    Route::get('/postulaciones/create', [PostulacionController::class, 'create'])->name('postulaciones.create');
+    Route::post('/postulaciones', [PostulacionController::class, 'store'])->name('postulaciones.store');
+    Route::get('/postulaciones/{postulacion}', [PostulacionController::class, 'show'])->name('postulaciones.show');
+    Route::get('/postulaciones/{postulacion}/edit', [PostulacionController::class, 'edit'])->name('postulaciones.edit');
+    Route::put('/postulaciones/{postulacion}', [PostulacionController::class, 'update'])->name('postulaciones.update');
+    Route::delete('/postulaciones/{postulacion}', [PostulacionController::class, 'destroy'])->name('postulaciones.destroy');
 
 
 });
