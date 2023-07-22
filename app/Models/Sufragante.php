@@ -18,8 +18,11 @@ class Sufragante extends Model implements Authenticatable
     protected $table = 'sufragantes';
 
     protected $fillable = [
+        'numeroDocumento',
         'nombres',
         'email',
+        'genero',
+        'estado',
         'token',
     ];
 

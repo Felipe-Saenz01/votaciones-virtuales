@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="relative h-6">
                     <h1 class="m-5">Lista Sufragantes</h1>
-                    <a href="#" class="bg-green-500 hover:bg-green-700 dark:text-gray-200 py-2 px-4 font-bold rounded-md absolute top-0 right-0 mr-5">
+                    <a href="{{route('sufragante.create')}}" class="bg-green-500 hover:bg-green-700 dark:text-gray-200 py-2 px-4 font-bold rounded-md absolute top-0 right-0 mr-5">
                         Crear
                     </a>
                 </div>
@@ -36,9 +36,10 @@
                             </tr>
                         @endforeach
                     </tbody>
-            </div>
-            <div class="my-10 mx-5">
-                {{$sufragantes->links()}}
+                </table>
+                <div class="my-10 mx-5">
+                    {{$sufragantes->links()}}
+                </div>
             </div>
         </div>
     </div>

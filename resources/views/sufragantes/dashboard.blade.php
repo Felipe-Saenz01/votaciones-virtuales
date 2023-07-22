@@ -1,5 +1,7 @@
 <x-guest-layout>
 
+    <x-sufragante-navigation-menu></x-sufragante-navigation-menu>
+
     <div>Bienvenido </div>
     <div>{{ auth('sufragante')->user()->nombres}}</div>
     <form method="POST" action="{{ route('sufragante.logout') }}">

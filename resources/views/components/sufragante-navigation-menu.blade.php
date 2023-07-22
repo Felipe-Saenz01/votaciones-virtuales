@@ -48,10 +48,12 @@
 
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('sufragante.logout') }}" x-data>
-                                <x-dropdown-link href="{{ route('sufragante.logout') }}">
-                                    {{ __('Cerrar Sesion') }}
-                                </x-dropdown-link>
                                 @csrf
+                                @method('POST')
+                                {{-- <x-dropdown-link type="submit">
+                                    {{ __('Cerrar Sesion') }}
+                                </x-dropdown-link> --}}
+                                <button class="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out" type="submit">Cerrar Sesion</button>
 
                             </form>
                         </x-slot>
