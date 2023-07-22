@@ -50,8 +50,14 @@ Route::middleware([
     ->name('calendario.update');
     
 
+    //Rutas Sufragantes
+
     Route::get('/sufragantes',[SufraganteController::class, 'index'])
     ->name('sufragante.index');
+    Route::get('/sufragantes/create',[SufraganteController::class, 'create'])
+    ->name('sufragante.create');
+    Route::post('/archivoPlano-sufragantes',[SufraganteController::class, 'filePlanSufragate'])
+    ->name('sufragante.archivo');
 
         
     /////rutas de cuerpo colegiado

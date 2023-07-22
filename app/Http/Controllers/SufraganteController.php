@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\SufragantesImport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Mail\sufraganteEmailToken;
 use App\Models\Sufragante;
 use Illuminate\Http\Request;
@@ -37,7 +39,7 @@ class SufraganteController extends Controller
      */
     public function create()
     {
-        //
+        return view('sufragantes.create');
     }
 
     /**
@@ -148,5 +150,20 @@ class SufraganteController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('welcome');
+    }
+
+    public function filePlanSufragate(Request $request)
+    {   
+        //return $request;
+        $request->validate([
+            'file' => 'required|mimes:xlsx',
+        ]);
+
+        $file = $request->file('file');
+
+        Excel::import(new SufragantesImport, $file);
+
+
+        return redirect()->route('sufragante.index')->with('success', 'Los registros se han importado correctamente.');
     }
 }
