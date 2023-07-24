@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable;
-
+use Illuminate\Notifications\Notifiable;
 
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
@@ -14,6 +14,7 @@ use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 class Sufragante extends Model implements Authenticatable
 {
     use HasFactory;
+    use Notifiable;
 
     protected $table = 'sufragantes';
 

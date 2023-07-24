@@ -5,7 +5,9 @@ use App\Http\Controllers\SufraganteController;
 
 Route::group(['prefix' => 'sufragante'], function () {
 
-   Route::post('/verify-token', [SufraganteController::class,'validatetoken'])
+   // Route::post('/verify-token', [SufraganteController::class,'validatetoken'])
+   // ->name('sufragante.verify-token');
+   Route::get('/verify-token/{numeroDocumento}/{codigo}', [SufraganteController::class,'validatetoken'])
    ->name('sufragante.verify-token');
    
    Route::post('/send-token', [SufraganteController::class, 'generatetoken'])

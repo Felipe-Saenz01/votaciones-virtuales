@@ -6,6 +6,7 @@ use App\Imports\SufragantesImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Mail\sufraganteEmailToken;
 use App\Models\Sufragante;
+use App\Notifications\SendSufraganteToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -103,43 +104,37 @@ class SufraganteController extends Controller
             $sufragante->password = Hash::make($token);
             $sufragante->save();
 
-            $correo = new sufraganteEmailToken($sufragante);
-            Mail::to($sufragante->email)->send($correo);
+
+            $sufragante->notify(new SendSufraganteToken($sufragante->nombres, $sufragante->codigo, $sufragante->numeroDocumento));
+            // $correo = new sufraganteEmailToken($sufragante);
+            // Mail::to($sufragante->email)->send($correo);
         }
 
-        return view('sufragantes.token-verification',[
-            'nombres' => $sufragante->nombres,
-            'email' => $sufragante->email,
-        ]);
+        return redirect()->route('welcome')->with('status', 'Se ha enviado un correo para acceder al aplicativo.');
         
     }
 
     /**
      * Verifica el correo y el token para permitir la autenticacion.
      */
-    public function validatetoken(Request $request)
+    public function validatetoken($numeroDocumento, $codigo)
     {
-        $request->validate([
-            'codigo' => 'required',
-        ]);
-        $sufragante = Sufragante::where('email', $request->email)->first();
+        $sufragante = Sufragante::where('numeroDocumento', $numeroDocumento)->first();
         if(!$sufragante){
             return view('/');
         }
 
 
-        if($request->codigo != $sufragante->codigo){
+        if($codigo != $sufragante->codigo){
             return redirect()->route('welcome')->withErrors('Código incorrecto');
         }
         
-        $sufraganteAuth = Auth::guard('sufragante')->attempt(['email'=> $request->email,'password' => $request->codigo]);
+        $sufraganteAuth = Auth::guard('sufragante')->attempt(['email'=> $sufragante->email,'password' => $codigo]);
         if($sufraganteAuth){
             $sufragante->codigo = null;
             $sufragante->save();
-            $request->session()->regenerate();
             return redirect()->intended(route('sufragante.dashboard'));
         }
-        return 'codigos coinciden: '.$request->codigo .' Y token: '.$sufragante->token;
 
     }
 

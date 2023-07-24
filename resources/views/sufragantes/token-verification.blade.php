@@ -15,7 +15,7 @@
             Hola <strong>{{$nombres}}</strong>, hemos enviado un código de acceso al correo suminstrado, ingresalo en el formulario para ingresar al aplicativo
         </div>
         
-        <form method="POST" action="{{ route('sufragante.verify-token') }}">
+        <form method="POST" action="#">
             @csrf
 
             <div>
