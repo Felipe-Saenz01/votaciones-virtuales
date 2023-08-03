@@ -17,7 +17,8 @@ class ProgramaAcademicoFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nombre_programa' => fake()->name(),
+            'estado' => 'activo',
         ];
     }
 }

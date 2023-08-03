@@ -11,17 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('postulaciones', function (Blueprint $table) {
-            $table->smallIncrements('idpostulacion');
+        Schema::create('postulacions', function (Blueprint $table) {
+            $table->id();
             $table->date('fechaPostulacion');
-            $table->unsignedBigInteger('idCuerpoColegiado');
+            $table->foreignId('cuerpo_colegiado_id')->constrained('cuerpo_colegiados');
+            $table->foreignId('programa_academico_id')->constrained('programa_academicos');
             $table->string('resultadoElectoral', 15);
-            $table->unsignedBigInteger('codigo_programa');
-            $table->string('facultad', 150);
+            $table->string('facultad', 25);
             $table->timestamps();
-
-            $table->foreign('idCuerpoColegiado')->references('id')->on('cuerpo_colegiados');
-            $table->foreign('codigo_programa')->references('id')->on('programa_academicos');
         });
     }
 
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('postulaciones');
+        Schema::dropIfExists('postulacions');
     }
 };

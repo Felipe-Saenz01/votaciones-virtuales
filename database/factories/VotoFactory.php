@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\cuerpoColegiado>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Voto>
  */
-class CuerpoColegiadoFactory extends Factory
+class VotoFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,7 @@ class CuerpoColegiadoFactory extends Factory
     public function definition(): array
     {
         return [
-            'nombre' => $this->faker->name(),
+            //
         ];
     }
 }
