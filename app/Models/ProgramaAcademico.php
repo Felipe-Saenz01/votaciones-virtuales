@@ -9,11 +9,11 @@ class ProgramaAcademico extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre_programa', 'idFacultad', 'estado'];
+    protected $fillable = ['nombre_programa', 'estado'];
 
     public function facultad()
     {
-        return $this->belongsTo(Facultad::class, 'idFacultad');
+        return $this->belongsTo(Facultad::class, );
     }
 
     public function postulaciones()

@@ -42,4 +42,9 @@ class Postulacion extends Model
     {
         return $this->belongsTo(ProgramaAcademico::class);
     }
+
+    public function calendarioElectoral()
+    {
+        return $this->belongsTo(CalendarioElectoral::class);
+    }
 }

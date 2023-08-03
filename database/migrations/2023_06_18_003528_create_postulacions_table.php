@@ -16,6 +16,7 @@ return new class extends Migration
             $table->date('fechaPostulacion');
             $table->foreignId('cuerpo_colegiado_id')->constrained('cuerpo_colegiados');
             $table->foreignId('programa_academico_id')->constrained('programa_academicos');
+            $table->foreignId('calendario_electoral_id')->constrained('calendario_electorals');
             $table->string('resultadoElectoral', 15);
             $table->string('facultad', 25);
             $table->timestamps();

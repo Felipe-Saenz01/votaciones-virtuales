@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Imports\SufragantesImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Mail\sufraganteEmailToken;
+use App\Models\Postulacion;
 use App\Models\Sufragante;
 use App\Notifications\SendSufraganteToken;
 use Illuminate\Http\Request;
@@ -18,20 +19,20 @@ use Illuminate\Support\Facades\Session;
 class SufraganteController extends Controller
 {
 
-    protected $redirectTo = '/sufragante';
+    //protected $redirectTo = '/sufragante';
     /**
      * Display a listing of the resource.
      */
 
-    public function __construct()
-    {
-        $this->middleware('guest:sufragante')->except('logout');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('guest:sufragante')->except('logout');
+    // }
 
     public function index()
     {
         return view('sufragantes.index', [
-            'sufragantes' => Sufragante::latest()->paginate()
+            'sufragantes' => Sufragante::latest()->paginate(20)
         ]);
     }
 
@@ -160,5 +161,12 @@ class SufraganteController extends Controller
 
 
         return redirect()->route('sufragante.index')->with('success', 'Los registros se han importado correctamente.');
+    }
+
+    public function inicio(){
+
+        return view('sufragantes.dashboard',[
+            'postulaciones' => Postulacion::latest()->paginate()
+        ]);
     }
 }

@@ -12,6 +12,7 @@
                 <table class="border-collapse border border-slate-500 table-auto m-5">
                     <thead class="bg-green-600 text-white">
                         <tr>
+                            <th class="border border-slate-600">calendarioElectoral</th>
                             <th class="border border-slate-600">Fecha Postulación</th>
                             <th class="border border-slate-600">Cuerpo Colegiado</th>
                             <th class="border border-slate-600">Resultado Electoral</th>
@@ -25,6 +26,7 @@
                     <tbody>
                         @foreach ($postulaciones as $postulacion)
                             <tr>
+                                <td class="border border-slate-700 px-4 mx-auto"> {{ $postulacion->calendarioElectoral->concepto }}</td>
                                 <td class="border border-slate-700 px-4 mx-auto"> {{ $postulacion->fechaPostulacion }}</td>
                                 <td class="border border-slate-700 px-4 mx-auto"> {{ $postulacion->cuerpoColegiado->nombre }}</td>
                                 <td class="border border-slate-700 px-4 mx-auto"> {{ $postulacion->resultadoElectoral }}</td>
@@ -32,7 +34,8 @@
                                 <td class="border border-slate-700 px-4 mx-auto"> {{ $postulacion->facultad}} </td>
                                 <td class="border border-slate-700 px-4 mx-auto"> 
                                 @foreach( $postulacion->candidatos as $candidato )
-                                    {{ $candidato->nombres_apellidos}}[{{$candidato->pivot->numero_plancha}}]  
+                                    <li>[ {{$candidato->pivot->numero_plancha}} ] {{ $candidato->nombres_apellidos}}</li>
+                                    
                                 @endforeach
                                 </td>
                                 <td class="border border-slate-700 px-4 mx-auto">

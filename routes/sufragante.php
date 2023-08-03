@@ -17,9 +17,10 @@ Route::group(['prefix' => 'sufragante'], function () {
    ->name('sufragante.logout');
    
    Route::group(['middleware' => 'auth:sufragante'], function () {
-      Route::get('/dashboard', function () {
-         return view('sufragantes.dashboard');
-      })->name('sufragante.dashboard');
+      Route::get('/dashboard', [SufraganteController::class, 'inicio'])->name('sufragante.dashboard');
+      // Route::get('/dashboard', function () {
+      //    return view('sufragantes.dashboard');
+      // })->name('sufragante.dashboard');
 
    });
 

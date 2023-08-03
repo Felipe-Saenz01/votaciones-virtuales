@@ -54,6 +54,7 @@ class DatabaseSeeder extends Seeder
         Postulacion::factory(5)->create([
             'cuerpo_colegiado_id' => rand(1,10),
             'programa_academico_id' => rand(1,10),
+            'calendario_electoral_id' => rand(1,3),
         ]);
 
         $postulaciones = Postulacion::all();
