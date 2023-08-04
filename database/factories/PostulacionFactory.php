@@ -17,7 +17,9 @@ class PostulacionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'fechaPostulacion' => $this->faker->dateTimeBetween('now', '+3 week')->format('Y-m-d'),
+            'resultadoElectoral' => $this->faker->text(15),
+            'facultad' => $this->faker->text(25),
         ];
     }
 }

@@ -27,6 +27,14 @@ class Sufragante extends Model implements Authenticatable
         'token',
     ];
 
+    protected $hidden = [
+        'password',
+        'codigo',
+        'email_verified_at',
+        'remember_token'
+
+    ];
+
     public function getAuthIdentifierName()
     {
         return 'id'; // Nombre del atributo de identificación del usuario

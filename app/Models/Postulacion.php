@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Postulacion extends Model
 {
     use HasFactory;
 
-    protected $table = 'postulaciones';
+    protected $table = 'postulacions';
 
-    protected $primaryKey = 'idpostulacion';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'fechaPostulacion',
@@ -21,13 +22,29 @@ class Postulacion extends Model
         'facultad',
     ];
 
+    public function candidatos(): BelongsToMany
+    {
+        return $this->belongsToMany(Candidato::class)->withPivot('numero_plancha', 'cantidad_votos');
+    }
+
+    public function votos()
+    {
+        return $this->hasMany(Voto::class);
+    }
+
+
     public function cuerpoColegiado()
     {
-        return $this->belongsTo(cuerpoColegiado::class, 'idCuerpoColegiado');
+        return $this->belongsTo(CuerpoColegiado::class);
     }
 
     public function programaAcademico()
     {
-        return $this->belongsTo(ProgramaAcademico::class, 'codigo_programa');
+        return $this->belongsTo(ProgramaAcademico::class);
+    }
+
+    public function calendarioElectoral()
+    {
+        return $this->belongsTo(CalendarioElectoral::class);
     }
 }
