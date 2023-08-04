@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Imports\SufragantesImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Mail\sufraganteEmailToken;
+use App\Models\Candidato;
 use App\Models\Postulacion;
 use App\Models\Sufragante;
+use App\Models\Voto;
 use App\Notifications\SendSufraganteToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -168,5 +170,38 @@ class SufraganteController extends Controller
         return view('sufragantes.dashboard',[
             'postulaciones' => Postulacion::latest()->paginate()
         ]);
+    }
+
+    public function votacion(Postulacion $postulacion){
+        $voto = Voto::where('postulacion_id', $postulacion->id)->where('sufragante_id', Auth::user()->id)->first();
+        if($voto){
+            return "existe";
+        }else{
+            //return "no existe";
+            return view('sufragantes.votacion',[
+                'postulacion' => $postulacion
+            ]);
+        }
+        
+    }
+
+    public function storeVotation(Request $request){
+        //return $request;
+        //obtiene la postulacion
+        $postulacion = Postulacion::find($request->postulacion_id);
+        //obtiene el candidato especifico a esa postulacion
+        $candidato = $postulacion->candidatos()->where('candidato_id', $request->candidato_id)->first();
+        //se obtiene la cantidad de votos del candidato obtenido
+        $voto = $candidato->pivot->cantidad_votos;
+        //se actualiza el valor del voto del candidato
+        $postulacion->candidatos()->updateExistingPivot($request->candidato_id, ['cantidad_votos' => $voto + 1]);
+        $sufragante_id = Auth::user()->id;
+        Voto::create([
+            'sufragante_id' => $sufragante_id,
+            'postulacion_id' => $request->postulacion_id,
+            'candidato_id' => $request->candidato_id,
+        ]);
+
+        return redirect()->route('sufragante.dashboard')->with('status', 'Su voto ha sido registrado.');
     }
 }

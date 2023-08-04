@@ -24,12 +24,12 @@ class Postulacion extends Model
 
     public function candidatos(): BelongsToMany
     {
-        return $this->belongsToMany(Candidato::class)->withPivot('numero_plancha');
+        return $this->belongsToMany(Candidato::class)->withPivot('numero_plancha', 'cantidad_votos');
     }
 
     public function votos()
     {
-        return $this->hasMany(Voto::class)->withPivot('cantidad_votos');
+        return $this->hasMany(Voto::class);
     }
 
 

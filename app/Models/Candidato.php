@@ -14,7 +14,7 @@ class Candidato extends Model
 
     public function Postulacions(): BelongsToMany
     {
-        return $this->belongsToMany(Postulacion::class)->withPivot('numero_plancha');
+        return $this->belongsToMany(Postulacion::class)->withPivot('numero_plancha', 'cantidad_votos');
     }
 
     public function votos()

@@ -1,26 +1,28 @@
 <x-guest-layout>
 
     <x-sufragante-navigation-menu></x-sufragante-navigation-menu>
-
-    <div>Bienvenido </div>
-    <div>{{ auth('sufragante')->user()->nombres}}</div>
     
-    <article>
-        @foreach ($postulaciones as $postulacion)
-            <div class="py-5 mx-5">
-                <h3> {{ $postulacion->calendarioElectoral->concepto}}</h3>
-                <p>{{ $postulacion->fechaPostulacion}}</p>
-                <p><strong>Facultad:</strong> {{$postulacion->facultad}} </p>
-                <p><strong>Cuerpo Colegiado:</strong> {{$postulacion->cuerpoColegiado->nombre}} </p>
-                <p><strong>Programa acadmico:</strong> {{$postulacion->programaAcademico->nombre_programa}} </p>
-                
-                <h4>Candidatos</h4>
-                @foreach ($postulacion->candidatos as $candidato)
-                    <li> [ {{$candidato->pivot->numero_plancha}} ] {{$candidato->nombres_apellidos}} </li>
-                @endforeach
-
+    <article class="bg-gray-200">
+        <div class="max-w-7xl mx-auto py-5 sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="md:grid md:grid-cols-2 md:gap-x-3 md:gap-y-2 ">
+                    @foreach ($postulaciones as $postulacion)
+                        <div class="md:col-span-1 ">
+                            <div class="p-5 mx-5 my-4 bg-green-200 overflow-hidden shadow-xl sm:rounded-lg">
+                                <h3 class=""><strong> {{ $postulacion->calendarioElectoral->concepto}} </strong></h3>
+                                <p>{{ $postulacion->fechaPostulacion}}</p>
+                                <p><strong>Facultad:</strong> {{$postulacion->facultad}} </p>
+                                <p><strong>Cuerpo Colegiado:</strong> {{$postulacion->cuerpoColegiado->nombre}} </p>
+                                <p><strong>Programa acadmico:</strong> {{$postulacion->programaAcademico->nombre_programa}} </p>
+                                <div class="flex items-cente justify-center mt-5">
+                                    <a href=" {{route('sufragante.votacion', $postulacion->id)}} " class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">Votar</a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
-        @endforeach
+        </div>
     </article>
 
 
