@@ -12,7 +12,9 @@ class CandidatoController extends Controller
      */
     public function index()
     {
-        //
+        return view('candidatos.index',[
+            'candidatos' => Candidato::latest()->paginate()
+        ]);
     }
 
     /**

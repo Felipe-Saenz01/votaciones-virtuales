@@ -16,7 +16,7 @@
                     <x-nav-link href="{{ route('sufragante.index') }}" :active="request()->routeIs('sufragante.*')">
                         {{ __('Sufragantes') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    <x-nav-link href="{{ route('candidatos.index') }}" :active="request()->routeIs('candidatos.*')">
                         {{ __('Candidatos') }}
                     </x-nav-link>
                     <x-nav-link href="{{ route('postulaciones.index') }}" :active="request()->routeIs('postulaciones.*')">
@@ -169,7 +169,7 @@
             <x-responsive-nav-link href="{{ route('sufragante.index') }}" :active="request()->routeIs('sufragante.*')">
                 {{ __('Sufragantes') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link href="{{ route('candidatos.index') }}" :active="request()->routeIs('candidatos.*')">
                 {{ __('Candidatos') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link href="{{ route('postulaciones.index') }}" :active="request()->routeIs('postulaciones.*')">
