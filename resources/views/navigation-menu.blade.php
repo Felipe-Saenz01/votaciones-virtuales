@@ -28,7 +28,7 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Resultados') }}
                     </x-nav-link>
-                    <x-nav-div :active="request()->routeIs('parametros.*')">
+                    <x-divnav :active="request()->routeIs('parametros.*')">
                         <!-- Dropdown Link -->
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
@@ -59,7 +59,7 @@
                                 </div>
                             </x-slot>
                         </x-dropdown>
-                    </x-nav-div>
+                    </x-divnav>
 
                 </div>
             </div>
