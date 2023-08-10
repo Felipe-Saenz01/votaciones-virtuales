@@ -9,6 +9,8 @@ use App\Models\CuerpoColegiado;
 use App\Models\Facultad;
 use App\Models\Postulacion;
 use App\Models\ProgramaAcademico;
+use App\Models\Sufragante;
+use App\Models\Tag;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -51,11 +53,16 @@ class DatabaseSeeder extends Seeder
 
         Candidato::factory(10)->create();
 
+        $tags = Tag::factory(3)->create();
+
         Postulacion::factory(5)->create([
             'cuerpo_colegiado_id' => rand(1,10),
             'programa_academico_id' => rand(1,10),
             'calendario_electoral_id' => rand(1,3),
-        ]);
+        ])
+        ->each(function ($postulacion) use ($tags){
+            $postulacion->tags()->attach($tags->random(rand(1,2)));
+        });
 
         $postulaciones = Postulacion::all();
         foreach($postulaciones as $postulacion){
@@ -68,11 +75,18 @@ class DatabaseSeeder extends Seeder
             }
         }
 
+        
+
+        Sufragante::factory(5)
+        ->create()
+        ->each(function ($sufragante) use ($tags){
+            $sufragante->tags()->attach($tags->random(rand(1,2)));
+        } );
+        //(function($sufragante) use ($tags) {$sufragante->tags()->attach()});
 
 
 
         // \App\Models\User::factory(10)->create();
-        // \App\Models\Sufragante::factory(5)->create();
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',

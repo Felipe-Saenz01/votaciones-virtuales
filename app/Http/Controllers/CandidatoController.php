@@ -12,7 +12,9 @@ class CandidatoController extends Controller
      */
     public function index()
     {
-        //
+        return view('candidatos.index',[
+            'candidatos' => Candidato::latest()->paginate()
+        ]);
     }
 
     /**
@@ -20,7 +22,7 @@ class CandidatoController extends Controller
      */
     public function create()
     {
-        //
+        return view('candidatos.create');
     }
 
     /**
@@ -28,7 +30,13 @@ class CandidatoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombres_apellidos' => 'required',
+        ]);
+
+        Candidato::create($request->all());
+
+        return redirect()->route('candidatos.index');
     }
 
     /**
@@ -44,7 +52,9 @@ class CandidatoController extends Controller
      */
     public function edit(Candidato $candidato)
     {
-        //
+        return view('candidatos.edit', [
+            'candidato' => $candidato
+        ]);
     }
 
     /**
@@ -52,7 +62,13 @@ class CandidatoController extends Controller
      */
     public function update(Request $request, Candidato $candidato)
     {
-        //
+        $request->validate([
+            'nombres_apellidos' => 'required',
+        ]);
+
+        $candidato->update($request->all());
+
+        return redirect()->route('candidatos.index');
     }
 
     /**
@@ -60,6 +76,9 @@ class CandidatoController extends Controller
      */
     public function destroy(Candidato $candidato)
     {
-        //
+        $candidato->delete();
+
+        return redirect()->route('candidatos.index')
+            ->with('success', 'Candidato eliminado exitosamente.');
     }
 }

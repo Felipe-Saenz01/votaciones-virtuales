@@ -51,7 +51,18 @@ class SufraganteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'numeroDocumento' => 'required',
+            'nombres' => 'required',
+            'email' => 'required|email',
+            'genero' => 'required',
+            'estado' => 'required',
+        ]);
+
+        Sufragante::create($request->all());
+
+        return redirect()->route('sufragante.index')
+            ->with('success', 'Sufragante creado exitosamente.');
     }
 
     /**
@@ -59,7 +70,7 @@ class SufraganteController extends Controller
      */
     public function show(Sufragante $sufragante)
     {
-        //
+        
     }
 
     /**
@@ -67,7 +78,9 @@ class SufraganteController extends Controller
      */
     public function edit(Sufragante $sufragante)
     {
-        //
+        return view('sufragantes.edit', [
+            'sufragante' => $sufragante,
+        ]);
     }
 
     /**
@@ -75,7 +88,18 @@ class SufraganteController extends Controller
      */
     public function update(Request $request, Sufragante $sufragante)
     {
-        //
+        $request->validate([
+            'numeroDocumento' => 'required',
+            'nombres' => 'required',
+            'email' => 'required|email',
+            'genero' => 'required',
+            'estado' => 'required',
+        ]);
+
+        $sufragante->update($request->all());
+
+        return redirect()->route('sufragante.index')
+            ->with('success', 'Sufragante actualizado exitosamente.');
     }
 
     /**
@@ -83,7 +107,10 @@ class SufraganteController extends Controller
      */
     public function destroy(Sufragante $sufragante)
     {
-        //
+        $sufragante->delete();
+
+        return redirect()->route('sufragante.index')
+            ->with('success', 'Sufragante eliminada exitosamente.');
     }
     /**
      * Genera un token de acceso y lo manda al correo suministrado
@@ -166,9 +193,14 @@ class SufraganteController extends Controller
     }
 
     public function inicio(){
+        $sufragante= Auth::user();
+        $postulaciones = Postulacion::whereHas('tags', function ($query) use ($sufragante) {
+            $query->whereIn('nombre', $sufragante->tags->pluck('nombre')->toArray());
+        })->get();
+        
 
         return view('sufragantes.dashboard',[
-            'postulaciones' => Postulacion::latest()->paginate()
+            'postulaciones' => $postulaciones
         ]);
     }
 
@@ -186,7 +218,7 @@ class SufraganteController extends Controller
     }
 
     public function storeVotation(Request $request){
-        //return $request;
+
         //obtiene la postulacion
         $postulacion = Postulacion::find($request->postulacion_id);
         //obtiene el candidato especifico a esa postulacion

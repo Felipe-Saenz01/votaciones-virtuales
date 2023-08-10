@@ -7,6 +7,7 @@ use App\Http\Controllers\CuerpoColegiadoController;
 use App\Http\Controllers\ParametrosController;
 use App\Http\Controllers\SufraganteController;
 use App\Http\Controllers\CalendarioElectoralController;
+use App\Http\Controllers\CandidatoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,6 +60,15 @@ Route::middleware([
     ->name('sufragante.create');
     Route::post('/archivoPlano-sufragantes',[SufraganteController::class, 'filePlanSufragate'])
     ->name('sufragante.archivo');
+    Route::post('/sufragantes',[SufraganteController::class, 'store'])
+    ->name('sufragante.store');
+    Route::get('/sufragantes/{sufragante}/edit',[SufraganteController::class, 'edit'])
+    ->name('sufragante.edit');
+    Route::put('/sufragantes/{sufragante}',[SufraganteController::class, 'update'])
+    ->name('sufragante.update');
+    Route::delete('/sufragantes/{sufragante}',[SufraganteController::class, 'destroy'])
+    ->name('sufragante.destroy');
+
 
         
     /////rutas de cuerpo colegiado
@@ -100,6 +110,9 @@ Route::middleware([
     Route::get('/postulaciones/{postulacion}/edit', [PostulacionController::class, 'edit'])->name('postulaciones.edit');
     Route::put('/postulaciones/{postulacion}', [PostulacionController::class, 'update'])->name('postulaciones.update');
     Route::delete('/postulaciones/{postulacion}', [PostulacionController::class, 'destroy'])->name('postulaciones.destroy');
+
+    //// rutas de Candidatos
+    Route::resource('candidatos', CandidatoController::class);
 
 
 });

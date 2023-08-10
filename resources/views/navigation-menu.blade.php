@@ -16,14 +16,11 @@
                     <x-nav-link href="{{ route('sufragante.index') }}" :active="request()->routeIs('sufragante.*')">
                         {{ __('Sufragantes') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    <x-nav-link href="{{ route('candidatos.index') }}" :active="request()->routeIs('candidatos.*')">
                         {{ __('Candidatos') }}
                     </x-nav-link>
                     <x-nav-link href="{{ route('postulaciones.index') }}" :active="request()->routeIs('postulaciones.*')">
                         {{ __('Postulacion') }}
-                    </x-nav-link>
-                    <x-nav-link href="{{ route('parametros.index') }}" :active="request()->routeIs('parametros.*')">
-                        {{ __('Parametros') }}
                     </x-nav-link>
                     <x-nav-link href="{{ route('calendario.index') }}" :active="request()->routeIs('calendario.*')">
                         {{ __('Calendario') }}
@@ -31,6 +28,39 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Resultados') }}
                     </x-nav-link>
+                    <x-divnav :active="request()->routeIs('parametros.*')">
+                        <!-- Dropdown Link -->
+                        <x-dropdown align="right" width="48">
+                            <x-slot name="trigger">
+                                <span class="inline-flex rounded-md">
+                                    <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                        <div>{{ __('Parametros') }}</div>
+                            
+                                        <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                                        </svg>
+                                    </button>
+                                </span>
+                            </x-slot>
+                        
+                            <x-slot name="content">
+                                <!-- Dropdown Items -->
+                                <div class="w-48">
+                                    <x-dropdown-link href="{{ route('parametros.facultades.index') }}">
+                                        {{ __('Facultades') }}
+                                    </x-dropdown-link>
+                                    <x-dropdown-link href="{{ route('parametros.cuerpo_colegiado.index') }}">
+                                        {{ __('Cuerpos Colegiados') }}
+                                    </x-dropdown-link>
+                                    <x-dropdown-link href="{{ route('parametros.programas.index') }}">
+                                        {{ __('Programas Academicos') }}
+                                    </x-dropdown-link>
+
+                                </div>
+                            </x-slot>
+                        </x-dropdown>
+                    </x-divnav>
+
                 </div>
             </div>
 
@@ -169,14 +199,11 @@
             <x-responsive-nav-link href="{{ route('sufragante.index') }}" :active="request()->routeIs('sufragante.*')">
                 {{ __('Sufragantes') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link href="{{ route('candidatos.index') }}" :active="request()->routeIs('candidatos.*')">
                 {{ __('Candidatos') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link href="{{ route('postulaciones.index') }}" :active="request()->routeIs('postulaciones.*')">
                 {{ __('Postulacion') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link href="{{ route('parametros.index') }}" :active="request()->routeIs('parametros.*')">
-                {{ __('Parametros') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link href="{{ route('calendario.index') }}" :active="request()->routeIs('calendario.*')">
                 {{ __('Calendario') }}
@@ -186,6 +213,29 @@
             </x-responsive-nav-link>
         </div>
 
+        <!-- Responsive Pamaetros -->
+        <div class="pt-4 pb-1 border-t border-gray-200">
+            <div class="flex items-center px-4">
+
+                <div>
+                    <div class="font-medium text-base text-gray-800">{{__('Parametros')}}</div>
+                </div>
+            </div>
+
+            <div class="mt-3 space-y-1">
+                <!-- Account Management -->
+                <x-responsive-nav-link href="{{ route('parametros.facultades.index') }}" :active="request()->routeIs('parametros.facultades.*')">
+                    {{ __('Facultades') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link href="{{ route('parametros.cuerpo_colegiado.index') }}" :active="request()->routeIs('parametros.cuerpo_colegiado.*')">
+                    {{ __('Cuerpos Colegiados') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link href="{{ route('parametros.programas.index') }}" :active="request()->routeIs('parametros.programas.*')">
+                    {{ __('Programas Academicos') }}
+                </x-responsive-nav-link>
+
+            </div>
+        </div>
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">

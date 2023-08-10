@@ -10,6 +10,9 @@ class Candidato extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'nombres_apellidos',
+    ];
 
 
     public function Postulacions(): BelongsToMany

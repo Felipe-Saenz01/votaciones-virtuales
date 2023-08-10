@@ -2,7 +2,7 @@
 
     <x-sufragante-navigation-menu></x-sufragante-navigation-menu>
     
-    <article class="bg-gray-200">
+    <article class=" min-h-screen bg-gray-200">
         <div class="max-w-7xl mx-auto py-5 sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="md:grid md:grid-cols-2 md:gap-x-3 md:gap-y-2 ">
@@ -10,6 +10,11 @@
                         <div class="md:col-span-1 ">
                             <div class="p-5 mx-5 my-4 bg-green-200 overflow-hidden shadow-xl sm:rounded-lg">
                                 <h3 class=""><strong> {{ $postulacion->calendarioElectoral->concepto}} </strong></h3>
+                                <div class="w-full mx-auto">
+                                    @foreach($postulacion->tags as $tag)
+                                    <span class="bg-gray-100 text-gray-800 text-xs font-medium mr-0.5 px-2.5 py-1 rounded-full dark:bg-gray-700 dark:text-gray-300">{{$tag->nombre}}</span>
+                                    @endforeach
+                                </div>
                                 <p>{{ $postulacion->fechaPostulacion}}</p>
                                 <p><strong>Facultad:</strong> {{$postulacion->facultad}} </p>
                                 <p><strong>Cuerpo Colegiado:</strong> {{$postulacion->cuerpoColegiado->nombre}} </p>

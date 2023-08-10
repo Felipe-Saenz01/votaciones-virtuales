@@ -21,10 +21,10 @@ class SufragantesImport implements ToModel, WithHeadingRow, WithBatchInserts, Wi
         return new Sufragante([
             'numeroDocumento' => $row['documento'],
             'nombres' => $row['nombres'],
-            'email' => $row['email'],
+            'email' => $row['correo'],
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
             'genero' => $row['genero'],
-            'estado' => 'activo',
+            'estado' => $row['estado'],
         ]);
     }
 
