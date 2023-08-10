@@ -13,7 +13,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('sufragante.dashboard') }}" :active="request()->routeIs('sufragante.dashboard')">
+                    <x-nav-link href="{{ route('sufragante.dashboard') }}" :active="request()->routeIs('sufragante.*')">
                         {{ __('Sufragantes') }}
                     </x-nav-link>
                 </div>

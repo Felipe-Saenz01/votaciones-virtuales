@@ -6,10 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
-use Illuminate\Contracts\Auth\UserProvider;
-use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
-// use Illuminate\Foundation\Auth\Sufragante as Authenticatable;
 
 class Sufragante extends Model implements Authenticatable
 {
@@ -63,5 +61,12 @@ class Sufragante extends Model implements Authenticatable
     public function getRememberTokenName()
     {
         return 'remember_token';
+    }
+
+    //Relaciones
+
+    public function tags(): MorphToMany
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 }

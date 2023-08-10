@@ -193,9 +193,14 @@ class SufraganteController extends Controller
     }
 
     public function inicio(){
+        $sufragante= Auth::user();
+        $postulaciones = Postulacion::whereHas('tags', function ($query) use ($sufragante) {
+            $query->whereIn('nombre', $sufragante->tags->pluck('nombre')->toArray());
+        })->get();
+        
 
         return view('sufragantes.dashboard',[
-            'postulaciones' => Postulacion::latest()->paginate()
+            'postulaciones' => $postulaciones
         ]);
     }
 
