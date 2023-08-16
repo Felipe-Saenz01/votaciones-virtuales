@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\SufragantesImport;
+use App\Imports\SufragantesTagsImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Mail\sufraganteEmailToken;
 use App\Models\Candidato;
@@ -190,6 +191,21 @@ class SufraganteController extends Controller
 
 
         return redirect()->route('sufragante.index')->with('success', 'Los registros se han importado correctamente.');
+    }
+
+    public function SufraganteTagAsignation(Request $request)
+    {   
+        //return $request;
+        $request->validate([
+            'file' => 'required|mimes:xlsx',
+        ]);
+
+        $file = $request->file('file');
+
+        Excel::import(new SufragantesTagsImport, $file);
+
+
+        return redirect()->route('sufragante.index')->with('success', 'Las Etiquetas se asignaron correctamente.');
     }
 
     public function inicio(){
