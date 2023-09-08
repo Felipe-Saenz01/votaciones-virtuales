@@ -40,9 +40,10 @@
                             </tr>
                         @endforeach
                     </tbody>
-            </div>
-            <div class="my-10 mx-5">
-                {{$programas->links()}}
+                </table>
+                <div class="my-10 mx-5">
+                    {{$programas->links()}}
+                </div>
             </div>
         </div>
     </div>

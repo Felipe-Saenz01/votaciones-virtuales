@@ -18,7 +18,7 @@
 
             <div class="mb-3">
                 <x-label for="idFacultad" value="{{ __('Facultad') }}" />
-                <x-select id="idFacultad" class="block mt-1 w-full" name="idFacultad" required>
+                <x-select id="idFacultad" class="block mt-1 w-full" name="facultad_id" required>
                     <option value="">Seleccione Programa Académico</option>
                     @foreach ($facultades as $index => $facultad)
                         <option value="{{ $facultad->id }}">{{ $nombrefacultades[$index]->nombrefacultad }}</option>

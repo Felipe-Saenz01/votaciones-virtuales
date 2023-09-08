@@ -35,9 +35,9 @@ class ProgramaAcademicoController extends Controller
     public function store(Request $request)
     {
         $request->validate([  
-            'nombre_programa'=> 'required' ,
-            'idFacultad'=> 'required' ,
-            'estado'=> 'required' ,
+            'nombre_programa' => 'required',
+            'facultad_id' => 'required',
+            'estado' => 'required',
         ]);
         
         ProgramaAcademico::create($request->all());
@@ -71,7 +71,7 @@ class ProgramaAcademicoController extends Controller
     {
         $request->validate([
             'nombre_programa' => 'required',
-            'idFacultad' => 'required',
+            'facultad_id' => 'required',
             'estado' => 'required',
         ]);
 
