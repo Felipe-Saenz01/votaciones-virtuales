@@ -30,14 +30,16 @@ class SufragantesTagsImport implements ToModel, WithHeadingRow, WithBatchInserts
         ]);
         $findSufragante = Sufragante::where('numeroDocumento', $row['documento'])->first();
         $tags = explode(', ', $row['etiquetas']);
+        $tagsArray = [];
         
         foreach ($tags as $tag) {
             $etiqueta = Tag::where('nombre', $tag)->first();
-            if ($etiqueta && !$findSufragante->tags()->where('nombre', $tag)->exists()) {
-                $findSufragante->tags()->save($etiqueta);
+            if ($etiqueta) {
+                $tagsArray[] = $etiqueta->id;
             }
         
         }
+        $findSufragante->tags()->sync($tagsArray);
 
 
         return $sufragante;

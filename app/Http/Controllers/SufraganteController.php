@@ -9,6 +9,7 @@ use App\Mail\sufraganteEmailToken;
 use App\Models\Candidato;
 use App\Models\Postulacion;
 use App\Models\Sufragante;
+use App\Models\Tag;
 use App\Models\Voto;
 use App\Notifications\SendSufraganteToken;
 use Illuminate\Http\Request;
@@ -44,7 +45,9 @@ class SufraganteController extends Controller
      */
     public function create()
     {
-        return view('sufragantes.create');
+        return view('sufragantes.create', [
+            'tags' => Tag::all()
+        ]);
     }
 
     /**
@@ -52,6 +55,8 @@ class SufraganteController extends Controller
      */
     public function store(Request $request)
     {
+        return $request;
+
         $request->validate([
             'numeroDocumento' => 'required',
             'nombres' => 'required',

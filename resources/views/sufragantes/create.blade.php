@@ -98,6 +98,26 @@
                                 <option value="Inactivo" :selected="old('estado')"">Inactivo</option>
                             </x-select>  
                         </div>
+                        {{-- <div class="mb-3">
+                            <x-label for="tags" value="{{ __('Tags') }}" />
+                            <x-select id="tags" class="block mt-1 w-full" name="tags[]" multiple>
+                                @foreach ($tags as $tag)
+                                    <option value="{{$tag->id}}" :selected="old('tags')">{{$tag->nombre}}</option>
+                                @endforeach
+                            </x-select>  
+                        </div> --}}
+
+                        <div class="mb-3">
+                            <x-label for="tags" value="{{ __('Tags') }}" />
+                            <x-select id="tags" class="block mt-1 w-full" name="tags[]" multiple>
+                                @foreach ($tags as $tag)
+                                    <option value="{{ $tag->id }}" {{ in_array($tag->id, old('tags', [])) ? 'selected' : '' }}>
+                                        {{ $tag->nombre }}
+                                    </option>
+                                @endforeach
+                            </x-select>  
+                        </div>
+                        
 
                         <div class="flex items-center justify-end mt-4">
                             <x-button class="ml-4" type="submit">
