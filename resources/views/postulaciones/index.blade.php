@@ -12,7 +12,7 @@
                 <table class="border-collapse border border-slate-500 table-auto m-5">
                     <thead class="bg-green-600 text-white">
                         <tr>
-                            <th class="border border-slate-600">calendarioElectoral</th>
+                            <th class="border border-slate-600">Calendario Electoral</th>
                             <th class="border border-slate-600">Fecha Postulación</th>
                             <th class="border border-slate-600">Cuerpo Colegiado</th>
                             <th class="border border-slate-600">Resultado Electoral</th>

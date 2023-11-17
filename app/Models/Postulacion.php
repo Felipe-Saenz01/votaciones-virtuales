@@ -17,9 +17,10 @@ class Postulacion extends Model
 
     protected $fillable = [
         'fechaPostulacion',
-        'idCuerpoColegiado',
+        'cuerpo_colegiado_id',
+        'programa_academico_id',
+        'calendario_electoral_id',
         'resultadoElectoral',
-        'codigo_programa',
         'facultad',
     ];
 

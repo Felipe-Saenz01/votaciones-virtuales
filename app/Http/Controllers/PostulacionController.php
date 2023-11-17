@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CalendarioElectoral;
 use App\Models\Facultad;
 use App\Models\Postulacion;
 use App\Models\CuerpoColegiado;
@@ -19,22 +20,24 @@ class PostulacionController extends Controller
 
     public function create()
     {
-        $facultades = Facultad::all('id');
-        $nombrefacultades = Facultad::all('nombrefacultad');
-        $cuerposColegiados = CuerpoColegiado::all();
-        $programasAcademicos = ProgramaAcademico::all();
-
-
-        return view('postulaciones.create', compact('cuerposColegiados', 'programasAcademicos','facultades','nombrefacultades'));
+        
+        return view('postulaciones.create', [
+            'facultades' => Facultad::all(),
+            'cuerposColegiados' => CuerpoColegiado::all(),
+            'programasAcademicos' => ProgramaAcademico::all(),
+            'calendariosElectorales' => CalendarioElectoral::all()
+            
+        ]);
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'fechaPostulacion' => 'required',
-            'idCuerpoColegiado' => 'required',
+            'cuerpo_colegiado_id' => 'required',
+            'programa_academico_id' => 'required',
+            'calendario_electoral_id' => 'required',
             'resultadoElectoral' => 'required',
-            'codigo_programa' => 'required',
             'facultad' => 'required',
         ]);
 
@@ -48,20 +51,25 @@ class PostulacionController extends Controller
 
     public function edit(Postulacion $postulacion)
     {
-        $nombrefacultades = Facultad::all('nombrefacultad');
-        $facultades = Facultad::all();
-        $cuerposColegiados = CuerpoColegiado::all();
-        $programasAcademicos = ProgramaAcademico::all();
-        return view('postulaciones.edit', compact('postulacion', 'cuerposColegiados', 'programasAcademicos','facultades',  'nombrefacultades'));
+        return view('postulaciones.edit', [
+            'facultades' => Facultad::all(),
+            'cuerposColegiados' => CuerpoColegiado::all(),
+            'programasAcademicos' => ProgramaAcademico::all(),
+            'calendariosElectorales' => CalendarioElectoral::all(),
+            'postulacion' => $postulacion,
+            
+        ]);
     }
 
     public function update(Request $request, Postulacion $postulacion)
     {
+
         $request->validate([
             'fechaPostulacion' => 'required',
-            'idCuerpoColegiado' => 'required',
+            'cuerpo_colegiado_id' => 'required',
+            'programa_acedemico_id' => 'required',
+            'calendario_electoral_id' => 'required',
             'resultadoElectoral' => 'required',
-            'codigo_programa' => 'required',
             'facultad' => 'required',
         ]);
 

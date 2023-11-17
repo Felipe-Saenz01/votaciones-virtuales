@@ -60,6 +60,8 @@ Route::middleware([
     ->name('sufragante.create');
     Route::post('/archivoPlano-sufragantes',[SufraganteController::class, 'filePlanSufragate'])
     ->name('sufragante.archivo');
+    Route::post('/sufragante/TagAsignation',[SufraganteController::class, 'SufraganteTagAsignation'])
+    ->name('sufragante.tags');
     Route::post('/sufragantes',[SufraganteController::class, 'store'])
     ->name('sufragante.store');
     Route::get('/sufragantes/{sufragante}/edit',[SufraganteController::class, 'edit'])
@@ -112,7 +114,14 @@ Route::middleware([
     Route::delete('/postulaciones/{postulacion}', [PostulacionController::class, 'destroy'])->name('postulaciones.destroy');
 
     //// rutas de Candidatos
-    Route::resource('candidatos', CandidatoController::class);
+    //Route::resource('candidatos', CandidatoController::class);
+    Route::get('/candidato', [CandidatoController::class, 'index'])->name('candidatos.index');
+    Route::get('/candidatos/create', [CandidatoController::class, 'create'])->name('candidatos.create');
+    Route::post('/candidatos', [CandidatoController::class, 'store'])->name('candidatos.store');
+    Route::get('/candidatos/{candidato}', [CandidatoController::class, 'show'])->name('candidatos.show');
+    Route::get('/candidatos/{candidato}/edit', [CandidatoController::class, 'edit'])->name('candidatos.edit');
+    Route::put('/candidatos/{candidato}', [CandidatoController::class, 'update'])->name('candidatos.update');
+    Route::delete('/candidatos/{candidato}', [CandidatoController::class, 'destroy'])->name('candidatos.destroy');
 
 
 });

@@ -21,7 +21,7 @@
                             <th class="border border-slate-600">Documento</th>
                             <th class="border border-slate-600">Nombres</th>
                             <th class="border border-slate-600">Email</th>
-                            <th class="border border-slate-600">Gnero</th>
+                            <th class="border border-slate-600">Genero</th>
                             <th class="border border-slate-600">Estado</th>
                             <th class="border border-slate-600">Tags</th>
                             <th class="border border-slate-600">Acciones</th>

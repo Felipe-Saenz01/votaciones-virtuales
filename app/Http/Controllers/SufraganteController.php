@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Imports\SufragantesImport;
+use App\Imports\SufragantesTagsImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Mail\sufraganteEmailToken;
 use App\Models\Candidato;
 use App\Models\Postulacion;
 use App\Models\Sufragante;
+use App\Models\Tag;
 use App\Models\Voto;
 use App\Notifications\SendSufraganteToken;
 use Illuminate\Http\Request;
@@ -51,15 +53,19 @@ class SufraganteController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'numeroDocumento' => 'required',
             'nombres' => 'required',
             'email' => 'required|email',
             'genero' => 'required',
             'estado' => 'required',
+            'tags' => 'required'
         ]);
 
-        Sufragante::create($request->all());
+        $sufragante = Sufragante::create($request->all());
+        $sufragante->tags()->sync($request->tags);
+
 
         return redirect()->route('sufragante.index')
             ->with('success', 'Sufragante creado exitosamente.');
@@ -94,9 +100,11 @@ class SufraganteController extends Controller
             'email' => 'required|email',
             'genero' => 'required',
             'estado' => 'required',
+            'tags' => 'required'
         ]);
 
         $sufragante->update($request->all());
+        $sufragante->tags()->sync($request->tags);
 
         return redirect()->route('sufragante.index')
             ->with('success', 'Sufragante actualizado exitosamente.');
@@ -190,6 +198,21 @@ class SufraganteController extends Controller
 
 
         return redirect()->route('sufragante.index')->with('success', 'Los registros se han importado correctamente.');
+    }
+
+    public function SufraganteTagAsignation(Request $request)
+    {   
+        //return $request;
+        $request->validate([
+            'file' => 'required|mimes:xlsx',
+        ]);
+
+        $file = $request->file('file');
+
+        Excel::import(new SufragantesTagsImport, $file);
+
+
+        return redirect()->route('sufragante.index')->with('success', 'Las Etiquetas se asignaron correctamente.');
     }
 
     public function inicio(){

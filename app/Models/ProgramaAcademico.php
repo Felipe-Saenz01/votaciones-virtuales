@@ -9,7 +9,7 @@ class ProgramaAcademico extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre_programa', 'estado'];
+    protected $fillable = ['nombre_programa', 'facultad_id', 'estado'];
 
     public function facultad()
     {

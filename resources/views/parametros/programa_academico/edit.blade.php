@@ -32,10 +32,10 @@
 
             <div class="mb-3">
                 <x-label for="idFacultad" value="{{ __('Facultad') }}" />
-                <x-select id="idFacultad" class="block mt-1 w-full" name="idFacultad" required>
+                <x-select id="idFacultad" class="block mt-1 w-full" name="facultad_id" required>
                     <option value="">Seleccione Periodo Académico</option>
                     @foreach ($facultades as $index => $facultad)
-                        <option value="{{ $facultad->id }}" {{ $programa->idFacultad == $facultad->id ? 'selected' : '' }}>
+                        <option value="{{ $facultad->id }}" {{ $programa->facultad_id == $facultad->id ? 'selected' : '' }}>
                             {{ $nombrefacultades[$index]->nombrefacultad }}
                         </option>
                     @endforeach

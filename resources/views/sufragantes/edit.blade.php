@@ -54,6 +54,8 @@
                 </x-select>  
             </div>
 
+            <livewire:tag-selector :sufragante="$sufragante"/>
+
             <div class="flex items-center justify-end mt-4">
                 <x-button class="ml-4" type="submit">
                     {{ __('Actualizar') }}

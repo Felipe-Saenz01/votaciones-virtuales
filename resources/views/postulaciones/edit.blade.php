@@ -32,10 +32,30 @@
 
             <div class="mb-3">
                 <x-label for="idCuerpoColegiado" value="{{ __('Cuerpo Colegiado') }}" />
-                <x-select id="idCuerpoColegiado" class="block mt-1 w-full" name="idCuerpoColegiado" required>
+                <x-select id="idCuerpoColegiado" class="block mt-1 w-full" name="cuerpo_colegiado_id" required>
                     <option value="">Seleccione Cuerpo Colegiado</option>
                     @foreach ($cuerposColegiados as $cuerpoColegiado)
-                        <option value="{{ $cuerpoColegiado->id }}" {{ $postulacion->idCuerpoColegiado == $cuerpoColegiado->id ? 'selected' : '' }}>{{ $cuerpoColegiado->nombre }}</option>
+                        <option value="{{ $cuerpoColegiado->id }}" {{ $postulacion->cuerpo_colegiado_id == $cuerpoColegiado->id ? 'selected' : '' }}>{{ $cuerpoColegiado->nombre }}</option>
+                    @endforeach
+                </x-select>
+            </div>
+
+            <div class="mb-3">
+                <x-label for="codigo_programa" value="{{ __('Programa Académico') }}" />
+                <x-select id="codigo_programa" class="block mt-1 w-full" name="programa_acedemico_id" required>
+                    <option value="">Seleccione Programa Académico</option>
+                    @foreach ($programasAcademicos as $programaAcademico)
+                        <option value="{{ $programaAcademico->id }}" {{ $postulacion->programa_academico_id == $programaAcademico->id ? 'selected' : '' }}>{{ $programaAcademico->nombre_programa }}</option>
+                    @endforeach
+                </x-select>
+            </div>
+
+            <div class="mb-3">
+                <x-label for="calendario_electoral" value="{{ __('Calendario Electoral') }}" />
+                <x-select id="calendario_electoral" class="block mt-1 w-full" name="calendario_electoral_id" required>
+                    <option value="">Seleccione Calendario Electoral</option>
+                    @foreach ($calendariosElectorales as $calendarioElectoral)
+                        <option value="{{$calendarioElectoral->id }}" {{ $postulacion->calendario_electoral_id == $calendarioElectoral->id ? 'selected' : '' }}>{{ $calendarioElectoral->concepto }}</option>
                     @endforeach
                 </x-select>
             </div>
@@ -46,22 +66,12 @@
             </div>
 
             <div class="mb-3">
-                <x-label for="codigo_programa" value="{{ __('Código del Programa Académico') }}" />
-                <x-select id="codigo_programa" class="block mt-1 w-full" name="codigo_programa" required>
-                    <option value="">Seleccione Programa Académico</option>
-                    @foreach ($programasAcademicos as $programaAcademico)
-                        <option value="{{ $programaAcademico->id }}" {{ $postulacion->codigo_programa == $programaAcademico->id ? 'selected' : '' }}>{{ $programaAcademico->nombre_programa }}</option>
-                    @endforeach
-                </x-select>
-            </div>
-
-            <div class="mb-3">
                 <x-label for="facultad" value="{{ __('Facultad') }}" />
                 <x-select id="facultad" class="block mt-1 w-full" name="facultad" required>
                     <option value="">Seleccione Periodo Académico</option>
-                    @foreach ($facultades as $index => $facultad)
-                        <option value="{{ $nombrefacultades[$index]->nombrefacultad }}" {{ $postulacion->facultad == $nombrefacultades[$index]->nombrefacultad ? 'selected' : '' }}>
-                            {{ $nombrefacultades[$index]->nombrefacultad }}
+                    @foreach ($facultades as $facultad)
+                        <option value="{{ $facultad->nombrefacultad }}" {{ $postulacion->facultad == $facultad->nombrefacultad ? 'selected' : '' }}>
+                            {{ $facultad->nombrefacultad }}
                         </option>
                     @endforeach
                 </x-select>
