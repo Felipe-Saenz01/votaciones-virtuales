@@ -107,7 +107,7 @@
                             </x-select>  
                         </div> --}}
 
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <x-label for="tags" value="{{ __('Tags') }}" />
                             <x-select id="tags" class="block mt-1 w-full" name="tags[]" multiple>
                                 @foreach ($tags as $tag)
@@ -116,7 +116,9 @@
                                     </option>
                                 @endforeach
                             </x-select>  
-                        </div>
+                        </div> --}}
+
+                        <livewire:tag-selector />
                         
 
                         <div class="flex items-center justify-end mt-4">

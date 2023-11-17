@@ -45,9 +45,7 @@ class SufraganteController extends Controller
      */
     public function create()
     {
-        return view('sufragantes.create', [
-            'tags' => Tag::all()
-        ]);
+        return view('sufragantes.create');
     }
 
     /**
@@ -55,7 +53,6 @@ class SufraganteController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
 
         $request->validate([
             'numeroDocumento' => 'required',
@@ -63,9 +60,12 @@ class SufraganteController extends Controller
             'email' => 'required|email',
             'genero' => 'required',
             'estado' => 'required',
+            'tags' => 'required'
         ]);
 
-        Sufragante::create($request->all());
+        $sufragante = Sufragante::create($request->all());
+        $sufragante->tags()->sync($request->tags);
+
 
         return redirect()->route('sufragante.index')
             ->with('success', 'Sufragante creado exitosamente.');
@@ -100,9 +100,11 @@ class SufraganteController extends Controller
             'email' => 'required|email',
             'genero' => 'required',
             'estado' => 'required',
+            'tags' => 'required'
         ]);
 
         $sufragante->update($request->all());
+        $sufragante->tags()->sync($request->tags);
 
         return redirect()->route('sufragante.index')
             ->with('success', 'Sufragante actualizado exitosamente.');
